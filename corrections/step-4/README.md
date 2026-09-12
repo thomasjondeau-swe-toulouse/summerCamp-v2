@@ -1,10 +1,14 @@
-# step-4 — le point de départ de l'**atelier 4** (multi-tenant + membres)
+# step-4 — corrigé de l'**atelier 3** (le back-end et la base)
 
-**Contient :** la todo-list branchée sur FastAPI + PostgreSQL. Les tâches survivent au rechargement.
-C'est l'arrivée de l'atelier 3.
-**Ne contient pas :** les familles ni les membres. Tout le monde partage la même liste.
+**Contient :** les 5 routes de l'API (`/api/health`, plus lister, créer, cocher, supprimer),
+le modèle `Task`, la connexion à PostgreSQL, et le front branché dessus.
+Les tâches survivent au rechargement.
 
-**C'est aussi le corrigé de l'atelier 3.**
+**Ne contient pas :** de comptes ni de familles. Tout le monde partage la même liste.
+
+**À regarder en priorité :** la gestion des erreurs dans `backend/main.py` — un titre vide
+renvoie un **422**, une tâche introuvable un **404**. Ce n'est pas un détail : renvoyer une
+erreur avec un code 200 tromperait celui qui appelle l'API.
 
 ## Lancer ce dossier
 
@@ -12,5 +16,8 @@ C'est l'arrivée de l'atelier 3.
 docker compose up
 ```
 
-- L'app : http://localhost:5173
-- L'API : http://localhost:8000/docs
+Puis clique sur **Open in Browser** (ou onglet **PORTS** → ligne **5173** → 🌐).
+Swagger, la documentation de l'API, est sur le port **8000**, chemin **`/docs`**.
+
+> ⚠️ Ce dossier est un **corrigé** : il sert à comparer, pas à travailler dedans.
+> Ton code à toi est dans `familytask/`.

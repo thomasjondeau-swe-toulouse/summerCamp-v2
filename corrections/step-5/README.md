@@ -1,10 +1,14 @@
-# step-5 — le point de départ de l'**atelier 5** (l'assistant IA)
+# step-5 — corrigé de l'**atelier 4** (comptes et connexion)
 
-**Contient :** le multi-tenant (code famille) et les membres : chaque famille a son espace privé,
-et une tâche peut être assignée à quelqu'un. C'est l'arrivée de l'atelier 4.
-**Ne contient pas :** le chatbot.
+**Contient :** l'inscription, la connexion, la déconnexion, les jetons, le multi-tenant
+(chaque famille son espace), les rôles admin, et les écrans `Login`, `Signup`,
+`TasksView`, `FamilyView` avec vue-router.
 
-**C'est aussi le corrigé de l'atelier 4.**
+**Ne contient pas :** l'assistant IA.
+
+**À regarder en priorité :** la dépendance `current_member` dans `backend/main.py` —
+c'est elle qui lit le jeton et refuse l'accès (401) sans lui. Et `frontend/src/api.js`,
+qui ajoute le jeton à chaque appel sans que tu aies à y penser.
 
 ## Lancer ce dossier
 
@@ -12,5 +16,8 @@ et une tâche peut être assignée à quelqu'un. C'est l'arrivée de l'atelier 4
 docker compose up
 ```
 
-- L'app : http://localhost:5173
-- L'API : http://localhost:8000/docs
+Puis clique sur **Open in Browser** (ou onglet **PORTS** → ligne **5173** → 🌐).
+Swagger, la documentation de l'API, est sur le port **8000**, chemin **`/docs`**.
+
+> ⚠️ Ce dossier est un **corrigé** : il sert à comparer, pas à travailler dedans.
+> Ton code à toi est dans `familytask/`.

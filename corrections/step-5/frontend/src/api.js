@@ -21,4 +21,14 @@ export function setMe(m) {
 export function getMe() {
   try { return JSON.parse(localStorage.getItem('me') || 'null') } catch (e) { return null }
 }
-export function logout() { setToken(''); setMe(null) }
+export async function logout() {
+  // On prévient d'abord le serveur (il invalide le jeton), puis on nettoie
+  // le navigateur. Le `catch` garantit qu'on se déconnecte quand même si
+  // le réseau est coupé : mieux vaut sortir que rester bloqué·e.
+  try {
+    await fetch(API + '/api/logout', { method: 'POST', headers: authHeaders() })
+  } catch (e) {
+    console.warn('Serveur injoignable, déconnexion locale seulement.')
+  }
+  setToken(''); setMe(null)
+}

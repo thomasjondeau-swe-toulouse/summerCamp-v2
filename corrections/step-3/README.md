@@ -1,11 +1,13 @@
-# step-3 — le point de départ de l'**atelier 3** (le back + la base)
+# step-3 — corrigé de l'**atelier 2** (le front-end)
 
-**Contient :** la todo-list front terminée — ajouter / cocher / supprimer, composant `TaskList.vue`,
-données réactives (`ref`). C'est l'arrivée de l'atelier 2.
+**Contient :** la todo-list terminée côté écran — ajouter, cocher, supprimer,
+le composant `TaskList.vue`, les données réactives (`ref`), et le design mobile.
+
 **Ne contient pas :** d'API ni de base de données. Recharge la page : les tâches disparaissent.
-C'est exactement le problème que tu vas résoudre aujourd'hui.
+C'est **voulu** — c'est le problème que tu résous le lendemain.
 
-**C'est aussi le corrigé de l'atelier 2.**
+**À comparer avec le tien :** `frontend/src/App.vue`, `frontend/src/components/TaskList.vue`,
+`frontend/src/style.css`.
 
 ## Lancer ce dossier
 
@@ -13,5 +15,8 @@ C'est exactement le problème que tu vas résoudre aujourd'hui.
 docker compose up
 ```
 
-- L'app : http://localhost:5173
-- L'API : http://localhost:8000/docs
+Puis clique sur **Open in Browser** (ou onglet **PORTS** → ligne **5173** → 🌐).
+Swagger, la documentation de l'API, est sur le port **8000**, chemin **`/docs`**.
+
+> ⚠️ Ce dossier est un **corrigé** : il sert à comparer, pas à travailler dedans.
+> Ton code à toi est dans `familytask/`.

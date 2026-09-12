@@ -31,3 +31,22 @@ def test_inscription_puis_tache():
 def test_sans_token_refuse():
     with TestClient(app) as client:
         assert client.get("/api/tasks").status_code == 401
+
+
+def test_logout_invalide_le_jeton():
+    """Après déconnexion, l'ancien jeton ne doit plus ouvrir aucune porte."""
+    with TestClient(app) as client:
+        r = client.post("/api/login", params={"email": "maman@durand.fr",
+                                              "password": "durand"})
+        jeton = r.json()["token"]
+        entetes = {"Authorization": "Bearer " + jeton}
+
+        # Le jeton marche
+        assert client.get("/api/me", headers=entetes).status_code == 200
+
+        # On se déconnecte
+        assert client.post("/api/logout", headers=entetes).status_code == 200
+
+        # Le MEME jeton ne vaut plus rien : le serveur l'a invalidé
+        assert client.get("/api/me", headers=entetes).status_code == 401
+        assert client.get("/api/tasks", headers=entetes).status_code == 401

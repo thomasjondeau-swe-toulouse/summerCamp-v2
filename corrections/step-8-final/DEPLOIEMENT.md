@@ -30,7 +30,7 @@ Tout se fait dans le navigateur — **rien à installer**. Compte ~20-30 min.
 
 - Le **1er chargement est lent** : les serveurs gratuits « s'endorment » après inactivité. C'est normal.
 - La **base gratuite** Render expire après ~1 mois : parfait pour une démo / un portfolio.
-- **L'assistant IA (Ollama) tourne en local, pas en ligne.** Pour la démo, montre l'assistant depuis ton PC (étape 5). (Le brancher en ligne nécessiterait un modèle hébergé — hors périmètre du camp.)
+- **L'assistant IA fonctionne aussi en ligne.** Il appelle un modèle hébergé (GitHub Models), pas un modèle local : il n'y a donc rien de plus à faire. Render te demandera simplement la valeur de `AI_TOKEN` au moment du déploiement — c'est le même jeton que celui de lundi. Ta famille peut vraiment lui parler.
 
 ## Si le temps manque (côté formateur)
 

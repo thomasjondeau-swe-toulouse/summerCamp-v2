@@ -146,6 +146,26 @@ def login(email: str, password: str, session: Session = Depends(get_session)):
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
+@app.get("/api/me")
+def me(me: Member = Depends(current_member)):
+    """Qui suis-je ? Renvoie le membre connecté, sans son empreinte de mot de passe."""
+    return {"id": me.id, "email": me.email, "name": me.name, "lien": me.lien,
+            "is_admin": me.is_admin, "family_code": me.family_code}
+
+
+@app.post("/api/logout")
+def logout(me: Member = Depends(current_member),
+           session: Session = Depends(get_session)):
+    """Se déconnecter : on efface le jeton côté serveur.
+
+    Effacer le jeton du navigateur ne suffit pas : tant que le serveur
+    l'accepte encore, quelqu'un qui l'aurait intercepté pourrait s'en servir.
+    Ici on le supprime pour de bon — l'ancien jeton ne vaut plus rien.
+    """
+    me.token = None
+    session.add(me)
+    session.commit()
+    return {"ok": True}
 
 
 # --- Liste (modifiable) des liens de parenté ---

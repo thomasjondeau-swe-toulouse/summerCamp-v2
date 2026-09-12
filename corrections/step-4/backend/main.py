@@ -1,8 +1,7 @@
 import os
-import random
 from typing import Optional
 
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import SQLModel, Field, Session, create_engine, select
 
@@ -42,16 +41,14 @@ def list_tasks(session: Session = Depends(get_session)):
 
 
 # Si le titre est vide, on attribue une tâche au hasard plutôt que de refuser.
-TITRES_ALEATOIRES = [
-    "Ranger le salon", "Sortir les poubelles", "Arroser les plantes",
-    "Passer l'aspirateur", "Faire la vaisselle", "Promener le chien",
-]
 
 
 @app.post("/api/tasks")
 def add_task(title: str, session: Session = Depends(get_session)):
+    # Un titre vide n'a pas de sens : on refuse proprement plutôt que
+    # d'enregistrer une tâche sans nom. 422 = « données invalides ».
     if not title.strip():
-        title = random.choice(TITRES_ALEATOIRES)
+        raise HTTPException(status_code=422, detail="Le titre ne peut pas être vide")
     task = Task(title=title)
     session.add(task); session.commit(); session.refresh(task)
     return task
@@ -60,8 +57,10 @@ def add_task(title: str, session: Session = Depends(get_session)):
 @app.patch("/api/tasks/{task_id}")
 def toggle_task(task_id: int, session: Session = Depends(get_session)):
     task = session.get(Task, task_id)
+    # 404 = « cette chose n'existe pas ». On lève une vraie erreur HTTP :
+    # renvoyer un message d'erreur avec un code 200 tromperait le client.
     if not task:
-        return {"error": "introuvable"}
+        raise HTTPException(status_code=404, detail="Tâche introuvable")
     task.done = not task.done
     session.add(task); session.commit(); session.refresh(task)
     return task
@@ -70,6 +69,7 @@ def toggle_task(task_id: int, session: Session = Depends(get_session)):
 @app.delete("/api/tasks/{task_id}")
 def delete_task(task_id: int, session: Session = Depends(get_session)):
     task = session.get(Task, task_id)
-    if task:
-        session.delete(task); session.commit()
+    if not task:
+        raise HTTPException(status_code=404, detail="Tâche introuvable")
+    session.delete(task); session.commit()
     return {"ok": True}

@@ -1,11 +1,20 @@
-# step-7 — le point de départ de l'**atelier 7** (le déploiement)
+# step-7 — corrigé de l'**atelier 6** (les tests)
 
-**Contient :** l'app FamilyTask complète, qui tourne en local. C'est l'arrivée de l'atelier 6.
-**Ne contient pas :** le déploiement (ni `render.yaml`, ni `api.js`).
+**Contient :** tout `step-6`, plus `backend/test_main.py` et `pytest` dans les dépendances.
 
-> Le code est identique à `step-6` : l'atelier 6 est un atelier de finitions,
-> il n'ajoute pas de fonctionnalité. Le dossier existe pour que la règle reste simple :
-> **ton dossier de code, c'est `step-N` pour l'atelier N.**
+**Ne contient pas :** le déploiement.
+
+**Lancer les tests :**
+
+```bash
+docker compose exec backend pytest -q
+```
+
+**À regarder en priorité :** comment un test crée une famille, obtient un jeton, crée une tâche
+et vérifie qu'elle est bien là — sans jamais ouvrir l'app. Et le test qui vérifie qu'une requête
+sans jeton reçoit bien un **401**.
+
+> 🔑 Même remarque que pour `step-6` : l'assistant a besoin de `AI_TOKEN` pour répondre.
 
 ## Lancer ce dossier
 
@@ -13,11 +22,8 @@
 docker compose up
 ```
 
-- L'app : http://localhost:5173
-- L'API : http://localhost:8000/docs
+Puis clique sur **Open in Browser** (ou onglet **PORTS** → ligne **5173** → 🌐).
+Swagger, la documentation de l'API, est sur le port **8000**, chemin **`/docs`**.
 
-**Activer l'assistant IA (une seule fois) :**
-
-```bash
-docker compose exec ai ollama pull qwen2.5:3b
-```
+> ⚠️ Ce dossier est un **corrigé** : il sert à comparer, pas à travailler dedans.
+> Ton code à toi est dans `familytask/`.

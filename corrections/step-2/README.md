@@ -1,12 +1,12 @@
-# step-2 — le point de départ de l'**atelier 2** (le front)
+# step-2 — corrigé de l'**atelier 1**
 
-**Contient :** l'environnement de dev qui tourne + l'écran de bienvenue (= l'arrivée de l'atelier 1).
-**Ne contient pas :** la todo-list. C'est **toi** qui la construis aujourd'hui.
+**Contient :** exactement la même chose que `step-1-starter`.
 
-> Ce dossier est volontairement identique à `step-1-starter` : l'atelier 1 ne produit pas de code,
-> il produit une machine qui marche.
+Ce n'est pas une erreur : l'atelier 1 ne produit **aucune ligne de code**. Il produit un
+environnement qui marche — un codespace ouvert, Copilot activé, une clé d'IA rangée,
+et une app qui démarre.
 
-**Le corrigé de l'atelier 2 est dans `step-3`** (ne l'ouvre qu'après avoir essayé).
+Si ton `familytask/` ressemble à ça le lundi soir, ta journée est réussie.
 
 ## Lancer ce dossier
 
@@ -14,5 +14,8 @@
 docker compose up
 ```
 
-- L'app : http://localhost:5173
-- L'API : http://localhost:8000/docs
+Puis clique sur **Open in Browser** (ou onglet **PORTS** → ligne **5173** → 🌐).
+Swagger, la documentation de l'API, est sur le port **8000**, chemin **`/docs`**.
+
+> ⚠️ Ce dossier est un **corrigé** : il sert à comparer, pas à travailler dedans.
+> Ton code à toi est dans `familytask/`.
