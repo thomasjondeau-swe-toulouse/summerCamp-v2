@@ -1,4 +1,15 @@
 # Render lit ce fichier et crée les 3 services (base, back, front) gratuitement.
+#
+# ⚠️ ATTENTION — ce fichier est celui du dossier autonome « step-8-final ».
+# Ses « rootDir » valent donc « backend » et « frontend ».
+#
+# Dans TON dépôt, render.yaml doit être posé à la RACINE (au même niveau que
+# les dossiers familytask/ et corrections/), et les rootDir deviennent :
+#     rootDir: familytask/backend
+#     rootDir: familytask/frontend
+#
+# C'est la seule différence entre ce fichier et le tien — mais c'est elle qui
+# fait échouer la plupart des premiers déploiements.
 databases:
   - name: familytask-db
     plan: free
@@ -25,7 +36,11 @@ services:
   - type: web
     name: familytask-front
     runtime: static
-    plan: free
+    # PAS de « plan: free » ici — et ce n'est pas un oubli.
+    # Les sites statiques sont TOUJOURS gratuits chez Render : le plan
+    # « free » n'existe pas pour eux. L'écrire quand même fait échouer la
+    # synchronisation du blueprint avec le message :
+    #     services[N].plan no such plan free for service type web
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
